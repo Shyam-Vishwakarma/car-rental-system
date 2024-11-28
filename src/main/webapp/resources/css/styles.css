@@ -265,7 +265,7 @@ header {
     margin: 0;
 }
 
-.update-button {
+.update-button, .approve-btn, .reject-btn {
     right: 0;
     top: 0;
     background-color: #28a745;
@@ -276,6 +276,10 @@ header {
     font-size: 0.9em;
 }
 
+.reject-btn {
+    background-color: red;
+}
+
 .my-details,
 .license {
     background-color: rgba(0, 0, 0, 0.6);
@@ -284,7 +288,7 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
-.section-heading {
+.section-heading, .payment-history-heading {
     font-size: 1.6em;
     color: orange;
     margin: 10px 0;
@@ -307,7 +311,7 @@ header {
 }
 
 .complete-profile-button:hover,
-.update-button:hover {
+.update-button:hover, .approve-btn:hover, .reject-btn:hover {
     opacity:0.9;
     color: #fff;
 }
@@ -341,7 +345,7 @@ header {
 }
 
 #pending {
-    background-color: lightyellow;
+    background-color: #ffff76;
     color: black;
     padding: 4px 8px;
     border-radius: 8px;
@@ -349,8 +353,8 @@ header {
 }
 
 #cancelled {
-    background-color: lightcoral;
-    color: white;
+    background-color: #ffc1c1;
+    color: black;
     padding: 4px 8px;
     border-radius: 8px;
     font-size: 18px;
@@ -362,4 +366,55 @@ header {
     padding: 4px 8px;
     border-radius: 8px;
     font-size: 18px;
+}
+
+.pending {
+    background-color: #ffff76;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+.cancelled {
+    background-color: #ffc1c1;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.confirmed {
+    background-color: lightgreen;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+#transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 10px 0 0;
+    justify-content: start;
+    align-items: center;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: grey transparent;
+    max-height: 200px;
+}
+
+.transaction-item {
+    display: flex;
+    color: white;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: space-between;
+    padding: 0px 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    font-size: 14px;
+}
+
+.action-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }

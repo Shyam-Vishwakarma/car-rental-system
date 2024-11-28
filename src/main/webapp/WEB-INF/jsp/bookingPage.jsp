@@ -26,16 +26,20 @@
         <h2 class="form-heading">New Booking</h2>
 
         <form:form action="/createBooking" method="post" modelAttribute="carBooking">
+            <form:hidden path="bookingId" />
+            <form:hidden path="carNumber" />
+            <form:hidden path="username" />
+
             <label class="label" for="bookingId">Booking Id:</label>
-            <form:input path="bookingId" id="bookingId" class="input" placeholder="bookingId" />
+            <form:input path="bookingId" id="bookingId" class="input" placeholder="bookingId" disabled="true"/>
             <br /><br />
 
             <label class="label" for="carNumber">Car Number:</label>
-            <form:input path="carNumber" id="carNumber" class="input" placeholder="carNumber" />
+            <form:input path="carNumber" id="carNumber" class="input" placeholder="carNumber" disabled="true"/>
             <br /><br />
 
             <label class="label" for="username">Username:</label>
-            <form:input path="username" id="username" class="input" placeholder="username" />
+            <form:input path="username" id="username" class="input" placeholder="username" disabled="true"/>
             <br /><br />
 
             <label class="label" for="rentRate">Rent Rate (per day):</label>

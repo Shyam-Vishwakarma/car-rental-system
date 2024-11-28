@@ -44,7 +44,7 @@
             </div>
 
             <div class="section car-details" id="bk-section">
-                <h2 class="section-heading">Car Details:</h2>
+                <h2 class="section-heading">Car Detail:</h2>
                 <p class="detail-item"><strong>Car Number:</strong> <span class="detail-value">${car.carNumber}</span></p>
                 <p class="detail-item"><strong>Car Name:</strong> <span class="detail-value">${car.carName}</span></p>
                 <p class="detail-item"><strong>Car Color:</strong> <span class="detail-value">${car.carColor}</span></p>
@@ -60,23 +60,43 @@
                 <p class="detail-item" id="bk-detail-item"><strong>Total Payment:</strong> <span class="detail-value">₹${booking.totalPayment}</span></p>
                 <p class="detail-item"><strong>Advance Payments:</strong> <span class="detail-value">₹${booking.advancePayment}</span></p>
                 <p class="detail-item"><strong>Pending Payments:</strong> <span class="detail-value">₹${booking.pendingPayment}</span></p>
+                <h3 class="detail-item payment-history-heading">Payment History:</h3>
+                <div id="transaction-list">
+                    <c:forEach items="${transactions}" var="transaction">
+                        <div class="transaction-item">
+                            <p class="transaction-id">${transaction.transactionId}</p>
+                            <p class="transaction-amount">₹${transaction.amount}</p>
+                            <p class="transaction-status">
+                                <c:choose>
+                                    <c:when test="${transaction.approved == null}">
+                                        <span class="status pending">In Review</span>
+                                    </c:when>
+                                    <c:when test="${transaction.approved == false}">
+                                        <span class="status cancelled">Failed</span>
+                                    </c:when>
+                                    <c:when test="${transaction.approved == true}">
+                                        <span class="status confirmed">Success</span>
+                                    </c:when>
+                                </c:choose>
+                            </p>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
 
 
         <div class="section action" id="bk-action">
             <div class="action-links">
-                <c:choose>
-                    <c:when test="${booking.pendingPayment > 0}">
-                        <a href="/makePayment/${booking.bookingId}" class="btn action-link">Pay dues</a>
-                    </c:when>
-                    <c:when test="${booking.status == 'CNF'}">
-                        <a href="/returnBooking/${booking.bookingId}" class="btn action-link">Return</a>
-                    </c:when>
-                    <c:when test="${booking.status == 'P' || booking.status == 'CNF'}">
-                        <a href="/cancelBooking/${booking.bookingId}" class="btn action-link">Cancel</a>
-                    </c:when>
-                </c:choose>
+                <c:if test="${booking.pendingPayment > 0 && booking.status != 'C' && booking.status != 'R'}">
+                    <a href="/makePayment/${booking.bookingId}" class="btn action-link">Pay dues</a>
+                </c:if>
+                <c:if test="${booking.status == 'CNF' && booking.pendingPayment == 0}">
+                    <a href="/returnBooking/${booking.bookingId}" class="btn action-link">Return</a>
+                </c:if>
+                <c:if test="${booking.status == 'P' || (booking.advancePayment == 0 && booking.status != 'C')}">
+                    <a href="/cancelBooking/${booking.bookingId}" class="btn action-link">Cancel</a>
+                </c:if>
             </div>
         </div>
     </div>

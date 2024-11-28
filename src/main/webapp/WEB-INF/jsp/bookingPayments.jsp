@@ -44,9 +44,9 @@
                     <td>₹${transaction.amount}</td>
                     <td>
                         <c:choose>
-                            <c:when test="${transaction.approved == null}">Pending</c:when>
-                            <c:when test="${transaction.approved == false}">Rejected</c:when>
-                            <c:when test="${transaction.approved == true}">Approved</c:when>
+                            <c:when test="${transaction.approved == null}"><span id = "pending">Pending</span></c:when>
+                            <c:when test="${transaction.approved == false}"><span id = "cancelled">Rejected</span></c:when>
+                            <c:when test="${transaction.approved == true}"><span id = "confirmed">Approved</span></c:when>
                         </c:choose>
                     </td>
                     <td class="action-cell">

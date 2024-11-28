@@ -36,9 +36,8 @@
                 <div class="dropdown">
                     <button class="dropbtn">Booking</button>
                     <div class="dropdown-content">
-                        <a href="/customerCarReport">New Booking</a>
                         <a href="/bookingPayments">Booking Payments</a>
-                        <a href="/bookingReport">Booking Report</a>
+                        <a href="/bookingReport">Booking Reports</a>
                     </div>
                 </div>
             </div>

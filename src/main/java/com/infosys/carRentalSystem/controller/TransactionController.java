@@ -1,6 +1,5 @@
 package com.infosys.carRentalSystem.controller;
 
-import com.infosys.carRentalSystem.bean.Car;
 import com.infosys.carRentalSystem.bean.CarBooking;
 import com.infosys.carRentalSystem.bean.Transaction;
 import com.infosys.carRentalSystem.dao.CarBookingDao;
@@ -75,4 +74,21 @@ public class TransactionController {
         return mv;
     }
 
+    @GetMapping("/returnBooking/{bookingId}")
+    public ModelAndView bookingReturn(@PathVariable String bookingId) {
+        CarBooking carBooking = carBookingDao.findById(bookingId);
+        carBooking.setStatus("R");
+        carBookingDao.save(carBooking);
+
+        return new ModelAndView("redirect:/bookingReport/" + bookingId);
+    }
+
+    @GetMapping("/cancelBooking/{bookingId}")
+    public ModelAndView bookingCancel(@PathVariable String bookingId) {
+        CarBooking carBooking = carBookingDao.findById(bookingId);
+        carBooking.setStatus("C");
+        carBookingDao.save(carBooking);
+
+        return new ModelAndView("redirect:/bookingReport/" + bookingId);
+    }
 }

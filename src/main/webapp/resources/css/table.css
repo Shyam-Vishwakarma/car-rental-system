@@ -12,13 +12,19 @@
     padding: 0 10px;
 }
 
-#carReportMainContainer {
+#carReportMainContainer, #bookingReportMainContainer, #bookingPaymentsMainContainer{
     background-color: rgba(0, 0, 0, 0.2);
     margin-left: auto;
     margin-right: 20px;
     border:1px solid black;
     min-height: calc(100vh - 150px);
     border-radius:5px;
+}
+
+#bookingReportMainContainer, #bookingPaymentsMainContainer {
+    margin-right: auto;
+    margin-left: 400px;
+    align-items: center;
 }
 
 #customerReportMainContainer {

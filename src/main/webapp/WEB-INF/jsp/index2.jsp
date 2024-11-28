@@ -12,7 +12,7 @@
     <header>
         <div class="header-content">
             <div class="navbar">
-                <h1 class="logo">CarRentalSystem</h1>
+                <h1 class="logo">rent&drive</h1>
                 <div class="dropdown">
                     <button class="dropbtn">Car</button>
                     <div class="dropdown-content">

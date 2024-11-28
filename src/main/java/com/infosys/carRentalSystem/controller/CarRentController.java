@@ -1,13 +1,7 @@
 package com.infosys.carRentalSystem.controller;
 
-import com.infosys.carRentalSystem.bean.Car;
-import com.infosys.carRentalSystem.bean.CarBooking;
-import com.infosys.carRentalSystem.bean.CarVariant;
-import com.infosys.carRentalSystem.bean.Customer;
-import com.infosys.carRentalSystem.dao.CarBookingDao;
-import com.infosys.carRentalSystem.dao.CarDao;
-import com.infosys.carRentalSystem.dao.CarVariantDao;
-import com.infosys.carRentalSystem.dao.CustomerDao;
+import com.infosys.carRentalSystem.bean.*;
+import com.infosys.carRentalSystem.dao.*;
 import com.infosys.carRentalSystem.exception.CustomerLicenceException;
 import com.infosys.carRentalSystem.exception.CustomerStatusException;
 import com.infosys.carRentalSystem.service.CarUserService;
@@ -39,6 +33,8 @@ public class CarRentController {
 
     @Autowired
     private CarBookingDao carBookingDao;
+    @Autowired
+    private TransactionDao transactionDao;
 
     @GetMapping("/variantAdd")
     public ModelAndView showVariantEntryPage() {
@@ -227,14 +223,19 @@ public class CarRentController {
         Car car = carDao.findById(carBooking.getCarNumber());
         System.out.println("6");
 
+        List<Transaction> transactions = transactionDao.findAllByBookingId(bookingId);
+
 
         mv.addObject("booking", carBooking);
         mv.addObject("variant", variant);
         mv.addObject("car", car);
+        mv.addObject("transactions", transactions);
         System.out.println("7");
 
         return mv;
     }
+
+
     private long calculateDaysBetween(String fromDate, String toDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate start = LocalDate.parse(fromDate, formatter);

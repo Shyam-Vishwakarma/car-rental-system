@@ -46,10 +46,10 @@
                     <td>${booking.toDate}</td>
                     <td>
                         <c:choose>
-                            <c:when test="${booking.status == 'CNF'}">Confirmed</c:when>
-                            <c:when test="${booking.status == 'P'}">Pending</c:when>
-                            <c:when test="${booking.status == 'C'}">Cancelled</c:when>
-                            <c:when test="${booking.status == 'R'}">Returned</c:when>
+                            <c:when test="${booking.status == 'CNF'}"><span id = "confirmed">Confirmed</span></c:when>
+                            <c:when test="${booking.status == 'P'}"><span id = "pending">Pending</span></c:when>
+                            <c:when test="${booking.status == 'C'}"><span id = "cancelled">Cancelled</span></c:when>
+                            <c:when test="${booking.status == 'R'}"><span id ="returned">Returned</span></c:when>
                         </c:choose>
                     </td>
                     <td>₹${booking.pendingPayment}</td>

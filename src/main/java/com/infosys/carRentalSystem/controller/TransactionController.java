@@ -1,10 +1,10 @@
 package com.infosys.carRentalSystem.controller;
 
+import com.infosys.carRentalSystem.bean.Car;
 import com.infosys.carRentalSystem.bean.CarBooking;
+import com.infosys.carRentalSystem.bean.Customer;
 import com.infosys.carRentalSystem.bean.Transaction;
-import com.infosys.carRentalSystem.dao.CarBookingDao;
-import com.infosys.carRentalSystem.dao.TransactionDao;
-import com.infosys.carRentalSystem.dao.TransactionRepository;
+import com.infosys.carRentalSystem.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +19,10 @@ public class TransactionController {
     TransactionDao transactionDao;
     @Autowired
     private TransactionRepository transactionRepository;
-
+    @Autowired
+    private CarDao carDao;
+    @Autowired
+    private CustomerDao customerDao;
     @GetMapping("/makePayment/{bookingId}")
     public ModelAndView showPaymentPage(@PathVariable String bookingId) {
         Transaction transaction = new Transaction();
@@ -55,8 +58,10 @@ public class TransactionController {
             CarBooking carBooking = carBookingDao.findById(transaction.getBookingId());
             carBooking.setPendingPayment(carBooking.getPendingPayment() - transaction.getAmount());
             if(carBooking.getAdvancePayment() == 0.0) {
+                // First payment
                 carBooking.setAdvancePayment(transaction.getAmount());
-                // Update car status
+                updateCarStatus(carBooking.getCarNumber(), false);
+                updateCustomerStatus(carBooking.getUsername(), false);
             }
 
             carBooking.setStatus("CNF");
@@ -78,6 +83,10 @@ public class TransactionController {
     public ModelAndView bookingReturn(@PathVariable String bookingId) {
         CarBooking carBooking = carBookingDao.findById(bookingId);
         carBooking.setStatus("R");
+
+        updateCarStatus(carBooking.getCarNumber(), true);
+        updateCustomerStatus(carBooking.getUsername(), true);
+
         carBookingDao.save(carBooking);
 
         return new ModelAndView("redirect:/bookingReport/" + bookingId);
@@ -89,6 +98,20 @@ public class TransactionController {
         carBooking.setStatus("C");
         carBookingDao.save(carBooking);
 
+        updateCarStatus(carBooking.getCarNumber(), true);
+        updateCustomerStatus(carBooking.getUsername(), true);
+
         return new ModelAndView("redirect:/bookingReport/" + bookingId);
+    }
+    private void updateCarStatus(String carNumber, Boolean status) {
+        Car car = carDao.findById(carNumber);
+        car.setAvailable(status);
+        carDao.save(car);
+    }
+
+    private void updateCustomerStatus(String username, Boolean status) {
+        Customer customer = customerDao.findById(username);
+        customer.setStatus(status);
+        customerDao.save(customer);
     }
 }

@@ -48,9 +48,6 @@
             <label class="label" for="mobile">Enter Mobile Number:</label>
             <form:input path="mobile" id="mobile" class="input" placeholder="Mobile Number" />
 
-            <label class="label" for="status">Enter Status:</label>
-            <form:input path="status" id="status" class="input" placeholder="Status" />
-
             <label class="label" for="license">Enter Driving License Number:</label>
             <form:input path="license" id="license" class="input" placeholder="License Driving Number" />
 

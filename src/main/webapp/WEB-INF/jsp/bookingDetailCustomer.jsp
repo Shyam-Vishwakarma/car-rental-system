@@ -7,6 +7,25 @@
     <meta charset="UTF-8">
     <title>Booking Details</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css">
+        <script>
+            function handleAction(actionType, isActive, bookingId) {
+                if (isActive) {
+                    switch (actionType) {
+                        case "payDues":
+                            window.location.href = `/makePayment/${bookingId}`;
+                            break;
+                        case "returnBooking":
+                            window.location.href = `/returnBooking/${bookingId}`;
+                            break;
+                        case "cancelBooking":
+                            window.location.href = `/cancelBooking/${bookingId}`;
+                            break;
+                        default:
+                            alert("Invalid action.");
+                    }
+                }
+            }
+        </script>
 </head>
 <body>
     <header>
@@ -88,15 +107,26 @@
 
         <div class="section action" id="bk-action">
             <div class="action-links">
-                <c:if test="${booking.pendingPayment > 0 && booking.status != 'C' && booking.status != 'R'}">
-                    <a href="/makePayment/${booking.bookingId}" class="btn action-link">Pay dues</a>
-                </c:if>
-                <c:if test="${booking.status == 'CNF' && booking.pendingPayment == 0}">
-                    <a href="/returnBooking/${booking.bookingId}" class="btn action-link">Return</a>
-                </c:if>
-                <c:if test="${booking.status == 'P' || (booking.advancePayment == 0 && booking.status != 'C')}">
-                    <a href="/cancelBooking/${booking.bookingId}" class="btn action-link">Cancel</a>
-                </c:if>
+                <button
+                    class="btn action-link ${booking.pendingPayment > 0 && booking.status != 'C' && booking.status != 'R' ? '' : 'disabled'}"
+                    data-tooltip="There is no pending payments."
+                    onclick="handleAction('payDues', ${booking.pendingPayment > 0 && booking.status != 'C' && booking.status != 'R'}, '${booking.bookingId}')">
+                    Pay dues
+                </button>
+
+                <button
+                    class="btn action-link ${booking.status == 'CNF' && booking.pendingPayment == 0 ? '' : 'disabled'}"
+                    data-tooltip="You can return booking only if there is no pending payment."
+                    onclick="handleAction('returnBooking', ${booking.status == 'CNF' && booking.pendingPayment == 0}, '${booking.bookingId}')">
+                    Return
+                </button>
+
+                <button
+                    class="btn action-link ${booking.status == 'P' || (booking.advancePayment == 0 && booking.status != 'C') ? '' : 'disabled'}"
+                    data-tooltip="You can cancel booking only if it's Pending or no advance payment has been made."
+                    onclick="handleAction('cancelBooking', ${booking.status == 'P' || (booking.advancePayment == 0 && booking.status != 'C')}, '${booking.bookingId}')">
+                    Cancel
+                </button>
             </div>
         </div>
     </div>

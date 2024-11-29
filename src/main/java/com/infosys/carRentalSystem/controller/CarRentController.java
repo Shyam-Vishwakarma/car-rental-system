@@ -82,14 +82,6 @@ public class CarRentController {
     @GetMapping("/customerCarReport")
     public ModelAndView showCustomerCarReportPage() {
         String username = carUserService.getUsername();
-        String role = carUserService.getRole();
-        boolean status = customerDao.getCustomerStatusByUsername(username);
-        if(!status) throw new CustomerStatusException();
-
-        String licenceExpiryDate = customerDao.getLicenceExpiryDate(username);
-
-        if(!customerService.validateCustomerLicenceDate(licenceExpiryDate))
-            throw new CustomerLicenceException();
 
         List<Car> carList = carDao.getAvailableCars();
         List<CarVariant> variantList = carVariantDao.findAll();
@@ -147,6 +139,17 @@ public class CarRentController {
 
     @GetMapping("/newBooking/{carNumber}")
     public ModelAndView showNewBookingPage(@PathVariable String carNumber) {
+        // Validate status of the customer before proceeding for booking
+        String username = carUserService.getUsername();
+
+        boolean status = customerDao.getCustomerStatusByUsername(username);
+        if(!status) throw new CustomerStatusException();
+
+        String licenceExpiryDate = customerDao.getLicenceExpiryDate(username);
+        if(!customerService.validateCustomerLicenceDate(licenceExpiryDate))
+            throw new CustomerLicenceException();
+
+        // Booking
         CarBooking carBooking = new CarBooking();
         carBooking.setBookingId(carBookingDao.generateBookingId());
         carBooking.setCarNumber(carNumber);
@@ -203,34 +206,21 @@ public class CarRentController {
     }
     @GetMapping("/bookingReport/{bookingId}")
     public ModelAndView showBookingDetails(@PathVariable String bookingId) {
-        System.out.println("1");
         String role = carUserService.getRole();
-        System.out.println("2");
-
         CarBooking carBooking = carBookingDao.findById(bookingId);
-        System.out.println("3");
-
 
         String page = role.equalsIgnoreCase("ADMIN")
                 ? "bookingDetailAdmin" : "bookingDetailCustomer";
         ModelAndView mv = new ModelAndView(page);
-        System.out.println("4");
-
 
         CarVariant variant = carVariantDao.findById(carBooking.getVariantId());
-        System.out.println("5");
-
         Car car = carDao.findById(carBooking.getCarNumber());
-        System.out.println("6");
-
         List<Transaction> transactions = transactionDao.findAllByBookingId(bookingId);
-
 
         mv.addObject("booking", carBooking);
         mv.addObject("variant", variant);
         mv.addObject("car", car);
         mv.addObject("transactions", transactions);
-        System.out.println("7");
 
         return mv;
     }
@@ -245,18 +235,24 @@ public class CarRentController {
 
     @ExceptionHandler(CustomerStatusException.class)
     public ModelAndView handleCustomerStatusException(CustomerStatusException exception) {
-        String message="Sorry Dear Customer, Need to complete last booking & payment procedures";
-        ModelAndView mv=new ModelAndView("errorPage");
+        String message="Sorry Dear Customer! Need to complete last booking";
+        ModelAndView mv = new ModelAndView("errorPage");
+
+        mv.addObject("linkText", "Show Bookings");
+        mv.addObject("redirectLink", "/bookingReport");
+
         mv.addObject("errorMessage",message);
         return mv;
     }
     @ExceptionHandler(CustomerLicenceException.class)
     public ModelAndView handleCustomerLicenceException(CustomerLicenceException exception) {
-        String message = "Sorry Dear Customer, Need to renew your Licence";
+        String message = "Sorry Dear Customer! Need to renew your License";
         ModelAndView mv = new ModelAndView("errorPage");
+
+        mv.addObject("linkText", "Update License");
+        mv.addObject("redirectLink", "//myaccount");
+
         mv.addObject("errorMessage",message);
         return mv;
     }
-
-
 }

@@ -98,11 +98,11 @@
             <br /><br />
 
             <label class="label" for="amount">Amount paid:</label>
-            <form:input path="amount" id="amount" class="input" placeholder="Enter payment amount"/>
+            <form:input path="amount" id="amount" class="input" placeholder="Enter payment amount" required="true"/>
             <br /><br />
 
             <label class="label" for="paymentRefNo">Payment Reference Number:</label>
-            <form:input path="paymentRefNo" id="paymentRefNo" class="input" placeholder="Enter payment reference number"/>
+            <form:input path="paymentRefNo" id="paymentRefNo" class="input" placeholder="Enter payment reference number" required="true"/>
             <br /><br />
 
             <button class="submit-button btn" type="submit">Make Payment</button>

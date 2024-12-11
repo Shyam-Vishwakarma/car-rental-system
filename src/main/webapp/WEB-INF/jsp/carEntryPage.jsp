@@ -28,27 +28,27 @@
             <form:hidden path="available" />
 
             <label class="label" for="carNumber">Car Registration Number:</label>
-            <form:input path="carNumber" id="carNumber" class="input" placeholder="Registration number" />
+            <form:input path="carNumber" id="carNumber" class="input" placeholder="Registration number" required="true"/>
             <br /><br />
 
             <label class="label" for="carName">Enter Car Name:</label>
-            <form:input path="carName" id="carName" class="input" placeholder="Car name"/>
+            <form:input path="carName" id="carName" class="input" placeholder="Car name" required="true"/>
             <br /><br />
 
             <label class="label" for="carColor">Enter Car Color:</label>
-            <form:input path="carColor" id="carColor" class="input" placeholder="Car color" />
+            <form:input path="carColor" id="carColor" class="input" placeholder="Car color" required="true"/>
             <br /><br />
 
             <label class="label" for="manufacturer">Enter Car Manufacturer Name:</label>
-            <form:input path="manufacturer" id="manufacturer" class="input" placeholder="Manufacturer name" />
+            <form:input path="manufacturer" id="manufacturer" class="input" placeholder="Manufacturer name" required="true"/>
             <br /><br />
 
             <label class="label" for="yearOfMfg">Enter Year of manufacturing:</label>
-            <form:input path="yearOfMfg" id="yearOfMfg" class="input" placeholder="Year of manufacturing" />
+            <form:input path="yearOfMfg" id="yearOfMfg" class="input" placeholder="Year of manufacturing" required="true"/>
             <br /><br />
 
             <label class="label" for="rentRate">Enter Rent rate per hour:</label>
-            <form:input path="rentRate" id="rentRate" class="input" placeholder="Rent rate per hour" />
+            <form:input path="rentRate" id="rentRate" class="input" placeholder="Rent rate per hour" required="true"/>
             <br /><br />
 
             <div class="variantIdContainer">

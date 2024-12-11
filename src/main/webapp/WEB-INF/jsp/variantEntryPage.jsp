@@ -31,15 +31,15 @@
             <br /><br />
 
             <label class="label" for="variantName">Enter Variant Name:</label>
-            <form:input path="variantName" id="variantName" class="input" placeholder="Variant name" />
+            <form:input path="variantName" id="variantName" class="input" placeholder="Variant name" required="true"/>
             <br /><br />
 
             <label class="label" for="numberOfSeat">Enter Number of Seats:</label>
-            <form:input path="numberOfSeat" id="numberOfSeat" class="input" placeholder="No. of seats" />
+            <form:input path="numberOfSeat" id="numberOfSeat" class="input" placeholder="No. of seats" required="true"/>
             <br /><br />
 
             <label class="label" for="fuel">Enter Type of Fuel:</label>
-            <form:input path="fuel" id="fuel" class="input" placeholder="Fuel type" />
+            <form:input path="fuel" id="fuel" class="input" placeholder="Fuel type" required="true"/>
             <br /><br />
 
             <button class="submit-button btn" type="submit">Submit</button>

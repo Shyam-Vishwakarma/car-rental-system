@@ -50,16 +50,16 @@
         <h3 class="tertiary-heading">Already registered? <span><a class="redirect-link" href="/loginpage">Login here!</a></span></h3>
         <form:form id="registrationForm" method="post" action="/register" modelAttribute="userRecord" class="form-container">
             <label class="label">Enter User Id:</label>
-            <form:input path="username" class="input" placeholder="Enter your User ID"/>
+            <form:input path="username" class="input" placeholder="Enter your User ID" required="true"/>
 
             <label class="label">Enter Password:</label>
-            <form:input type="password" path="password" id="pass1" class="input" placeholder="Enter your Password"/>
+            <form:input type="password" path="password" id="pass1" class="input" placeholder="Enter your Password" required="true"/>
 
             <label class="label">Re-type Password:</label>
-            <input type="password" id="pass2" class="input" placeholder="Re-enter your Password"/>
+            <input type="password" id="pass2" class="input" placeholder="Re-enter your Password" required="true"/>
 
             <label class="label">Enter Email:</label>
-            <form:input path="email" class="input" placeholder="Enter your Email"/>
+            <form:input path="email" class="input" placeholder="Enter your Email" required="true"/>
 
             <div class="userTypeContainer">
                 <label class="label">Select User Type:</label>

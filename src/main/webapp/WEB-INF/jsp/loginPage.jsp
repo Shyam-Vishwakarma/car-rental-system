@@ -25,6 +25,7 @@
                 name="username"
                 id="username"
                 placeholder="User id"
+                required="true"
             />
             <br /><br />
             <label class="label" for="password">Enter Password:</label>
@@ -34,6 +35,7 @@
                 name="password"
                 id="password"
                 placeholder="Password"
+                required="true"
             />
             <br /><br />
             <input class="submit-button btn" type="submit" value="Login" />

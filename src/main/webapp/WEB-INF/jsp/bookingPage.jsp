@@ -47,11 +47,11 @@
             <br /><br />
 
             <label class="label" for="fromDate">Enter fromDate:</label>
-            <form:input path="fromDate" id="fromDate" class="input" placeholder="fromDate" />
+            <form:input type="date" path="fromDate" id="fromDate" class="input" placeholder="fromDate" required="true"/>
             <br /><br />
 
             <label class="label" for="toDate">Enter toDate:</label>
-            <form:input path="toDate" id="toDate" class="input" placeholder="toDate" />
+            <form:input type="date" path="toDate" id="toDate" class="input" placeholder="toDate" required="true"/>
             <br /><br />
 
             <button class="submit-button btn" type="submit">Proceed to Payment</button>

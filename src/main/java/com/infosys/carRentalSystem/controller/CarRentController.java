@@ -235,7 +235,7 @@ public class CarRentController {
 
     @ExceptionHandler(CustomerStatusException.class)
     public ModelAndView handleCustomerStatusException(CustomerStatusException exception) {
-        String message="Sorry Dear Customer! Need to complete last booking";
+        String message="Sorry Dear Customer! Need to complete pending payment of last booking";
         ModelAndView mv = new ModelAndView("errorPage");
 
         mv.addObject("linkText", "Show Bookings");

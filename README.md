@@ -76,15 +76,13 @@ A Java-based Car Rental System to manage vehicles, customers, and bookings. This
 5. **Access the Application**
     - Open your browser and go to: `http://localhost:8080/`
 
----
-
 ## Usage
 
 ### 1. Access the Application
 - After starting the application, open your web browser and navigate to: `http://localhost:8080/`
 
 ### 2. Login
-- Use one of the default user credentials (see "Getting Started") or register a new user.
+- Login or register as a new user.
 - Roles supported: Admin and Customer.
 
 ### 3. Functionality Overview
